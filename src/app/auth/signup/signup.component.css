@@ -1,0 +1,19 @@
+.login-form {
+  width: 900px;
+  background: #fff;
+  margin: 0 auto;
+  box-shadow: 0 15px 16.83px 0.17px rgb(0 0 0 / 5%);
+  -moz-box-shadow: 0 15px 16.83px .17px rgba(0,0,0,.05);
+  -webkit-box-shadow: 0 15px 16.83px 0.17px rgb(0 0 0 / 5%);
+  -o-box-shadow: 0 15px 16.83px .17px rgba(0,0,0,.05);
+  -ms-box-shadow: 0 15px 16.83px .17px rgba(0,0,0,.05);
+
+}
+
+.signup-content {
+  padding: 67px 40px 87px 20px;
+}
+
+.signup-image img {
+  width: 423px;
+}

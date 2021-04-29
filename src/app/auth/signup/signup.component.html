@@ -1,0 +1,27 @@
+<div class="container border rounded mt-5 p-4 login-form" *ngIf="!loading">
+  <div class="signup-content">
+    <div class="row">
+      <div class="signup-form col">
+        <h1 class="my-4 text-center font-weight-bold">Inscription</h1>
+        <form [formGroup]="signupForm">
+          <div class="form-group">
+            <label for="email">Adresse mail</label>
+            <input type="email" id="email" formControlName="email" class="form-control">
+          </div>
+          <div class="form-group">
+            <label for="password">Mot de passe</label>
+            <input type="password" id="password" formControlName="password" class="form-control">
+          </div>
+          <button class="btn btn-success" (click)="onSignup()" [disabled]="signupForm.invalid">Je m'inscris</button>
+        </form>
+      </div>
+      <div class="signup-image text-center col">
+        <figure>
+          <img src="https://cdn.pixabay.com/photo/2020/04/06/12/52/smurf-5009586_960_720.png" alt="sing up image">
+        </figure>
+        <a routerLink="/auth/login" class="signup-image-link"> J'ai déjà un compte</a>
+      </div>
+    </div>
+    <p>{{ errorMessage }}</p>
+  </div>
+</div>

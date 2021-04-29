@@ -1,0 +1,27 @@
+<div class="container border rounded mt-5 login-form" *ngIf="!loading">
+  <div class="signin-content">
+    <div class="row">
+      <div class="signin-image text-center col">
+        <figure>
+          <img src="https://cdn.pixabay.com/photo/2020/08/31/06/57/mushroom-5531655_960_720.png"
+               alt="champignon schtroumpf">
+        </figure>
+        <a routerLink="/auth/signup" class="signup-image-link">Créer un compte</a>
+      </div>
+      <div class="signin-form col">
+        <form [formGroup]="loginForm">
+          <h1 class="h3 my-3 font-weight-bold">Connectez-vous</h1>
+          <div class="form-group">
+            <label for="email">Adresse mail</label>
+            <input type="email" id="email" formControlName="email" class="form-control">
+          </div>
+          <div class="form-group">
+            <label for="password">Mot de passe</label>
+            <input type="password" id="password" formControlName="password" class="form-control">
+          </div>
+          <button class="btn btn-success" (click)="onLogin()" [disabled]="loginForm.invalid">Connexion</button>
+        </form>
+        <p>{{ errorMessage }}</p>
+      </div>
+    </div>
+  </div>
