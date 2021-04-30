@@ -1,1 +1,28 @@
-<p>friend-view works!</p>
+<div class="container">
+  <h1 class="my-3">Mes ami(e)s Schtroumpf</h1>
+  <p class="text-center" *ngIf="friend.length <= 0 && !loading">Aucun ami(es) Schtroumpf pour le moment !</p>
+  <div class="friend-grid" *ngIf="friend.length >= 0">
+    <div class="card"
+         *ngFor="let contact of friend"
+         [ngClass]="{'open': contact._id }"
+         >
+      <div class="row ">
+        <div class="col-auto img-profile">
+          <img src="{{ contact.imageUrl }}" class="img-fluid" alt="">
+        </div>
+        <div class="col">
+          <div class="card-block px-2">
+            <h4 class="card-title"><strong>Famille :</strong> {{ contact.famille }}</h4>
+            <p class="card-text"><strong>Âge :</strong> {{ contact.age }}</p>
+            <p class="card-text"><strong>Race :</strong> {{ contact.race }}</p>
+            <p class="card-text"><strong>Nourriture :</strong> {{ contact.nourriture }}</p>
+          </div>
+        </div>
+      </div>
+      <div class="card-footer w-100 text-muted">
+        <button class="btn btn-info mr-3" (click)="onFriendClicked(contact._id)">Modifier</button>
+        <button class="btn btn-warning">Supprimer</button>
+      </div>
+    </div>
+  </div>
+</div>
