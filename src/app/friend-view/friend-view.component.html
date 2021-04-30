@@ -1,5 +1,6 @@
 <div class="container">
   <h1 class="my-3">Mes ami(e)s Schtroumpf</h1>
+  <p><small>Clic sur les onglets pour voir le détail :)</small></p>
   <p class="text-center" *ngIf="friend.length <= 0 && !loading">Aucun ami(es) Schtroumpf pour le moment !</p>
   <div class="friend-grid" *ngIf="friend.length >= 0">
     <div class="card my-3"
