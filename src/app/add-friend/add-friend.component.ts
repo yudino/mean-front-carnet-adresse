@@ -16,6 +16,7 @@ export class AddFriendComponent implements OnInit {
 
   public friendForm: FormGroup;
   public loading = false;
+ // public userId: string;
   public imagePreview: string;
   public errorMessage: string;
 
@@ -34,6 +35,7 @@ export class AddFriendComponent implements OnInit {
       age: [0, Validators.required],
       image: [null, Validators.required, mimeType]
     });
+   // this.userId = this.auth.userId;
   }
 
   onSubmit(): void {

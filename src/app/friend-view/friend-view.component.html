@@ -2,9 +2,10 @@
   <h1 class="my-3">Mes ami(e)s Schtroumpf</h1>
   <p class="text-center" *ngIf="friend.length <= 0 && !loading">Aucun ami(es) Schtroumpf pour le moment !</p>
   <div class="friend-grid" *ngIf="friend.length >= 0">
-    <div class="card"
+    <div class="card my-3"
          *ngFor="let contact of friend"
          [ngClass]="{'open': contact._id }"
+         (click)="onFriendClicked(contact._id)"
          >
       <div class="row ">
         <div class="col-auto img-profile">
@@ -18,10 +19,6 @@
             <p class="card-text"><strong>Nourriture :</strong> {{ contact.nourriture }}</p>
           </div>
         </div>
-      </div>
-      <div class="card-footer w-100 text-muted">
-        <button class="btn btn-info mr-3" (click)="onFriendClicked(contact._id)">Modifier</button>
-        <button class="btn btn-warning">Supprimer</button>
       </div>
     </div>
   </div>

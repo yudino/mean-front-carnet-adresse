@@ -4,6 +4,7 @@ import { Subject } from 'rxjs';
 import {Schtroumpf} from '../models/Schtroumpf.model';
 
 
+
 @Injectable({
   providedIn: 'root'
 })
@@ -33,9 +34,9 @@ export class CrudSchtroumpf {
     this.friend$.next(this.friend);
   }
 
-  getThingById(id: string) {
+  getFriendById(id: string) {
     return new Promise((resolve, reject) => {
-      this.http.get('http://localhost:3000/api/stuff/' + id).subscribe(
+      this.http.get('http://localhost:8080/api/carnet/' + id).subscribe(
         (response) => {
           resolve(response);
         },

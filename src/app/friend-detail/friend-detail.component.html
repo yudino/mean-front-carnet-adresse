@@ -1,1 +1,18 @@
-<p>friend-detail works!</p>
+<div class="container my-3 border rounded">
+  <h1 class="my-3">Profil ami Schtroumpf</h1>
+  <div class="row" *ngIf="!loading">
+    <div class="col mb-2">
+      <img [src]="friend?.imageUrl" alt="photo de profil">
+    </div>
+      <div class="col">
+        <h4><strong>Famille : </strong>{{ friend?.famille }}</h4>
+        <p class=""><strong>Âge : </strong>{{ friend?.age }}</p>
+        <p><strong>Race : </strong>{{ friend?.race }}</p>
+        <p><strong>Nourriture : </strong>{{ friend?.nourriture }}</p>
+        <button class="btn btn-info" (click)="onGoBack()"><< Retour</button>
+        <button class="btn btn-success m-1" (click)="onModify(friend._id)">Modifier</button>
+        <button class="btn btn-danger m-1" (click)="onDelete(friend._id)">Supprimer</button>
+      </div>
+
+  </div>
+</div>

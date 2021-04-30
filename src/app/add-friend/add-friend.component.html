@@ -1,11 +1,11 @@
 <div *ngIf="!loading" class="col-sm-6 offset-sm-3 mt-2">
   <form [formGroup]="friendForm">
-    <h1>Ajoutez des ami(e)s Schtroumpf</h1>
+    <h1 class="my-3">Ajoutez des ami(e)s Schtroumpf</h1>
     <div class="form-group">
       <label for="famille">Famille</label>
       <input type="text" placeholder="Indiquer sa famille..." id="famille" formControlName="famille" class="form-control">
     </div>
-    <button class="btn btn-success" type="button" (click)="filePicker.click()">Ajouter photo profil</button>
+    <button class="btn btn-success mr-3" type="button" (click)="filePicker.click()">Ajouter photo profil</button>
     <input type="file"  #filePicker (change)="onImagePick($event)">
     <div class="image-preview" *ngIf="imagePreview">
       <img [src]="imagePreview" alt="photo profil">

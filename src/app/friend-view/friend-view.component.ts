@@ -35,7 +35,7 @@ export class FriendViewComponent implements OnInit, OnDestroy {
   }
 
   onFriendClicked(id: string): void {
-    this.router.navigate(['/modify-friend/' + id]);
+    this.router.navigate(['/friend/' + id]);
   }
 
   ngOnDestroy(): void {
