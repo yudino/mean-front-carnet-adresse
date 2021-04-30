@@ -16,7 +16,7 @@ export class AddFriendComponent implements OnInit {
 
   public friendForm: FormGroup;
   public loading = false;
- // public userId: string;
+  public userId: string;
   public imagePreview: string;
   public errorMessage: string;
 
@@ -35,7 +35,7 @@ export class AddFriendComponent implements OnInit {
       age: [0, Validators.required],
       image: [null, Validators.required, mimeType]
     });
-   // this.userId = this.auth.userId;
+    this.userId = this.auth.userId;
   }
 
   onSubmit(): void {
@@ -46,6 +46,7 @@ export class AddFriendComponent implements OnInit {
     schtroumpf.nourriture = this.friendForm.get('nourriture').value;
     schtroumpf.age = this.friendForm.get('age').value;
     schtroumpf.imageUrl = '';
+    schtroumpf.userId = this.userId;
     this.crudSchtroumpf.createNewFriendWithFile(schtroumpf, this.friendForm.get('image').value).then(
       () => {
         this.friendForm.reset();

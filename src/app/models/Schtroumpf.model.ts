@@ -5,4 +5,5 @@ export class Schtroumpf {
   race: string;
   nourriture: string;
   imageUrl: string;
+  userId: string;
 }

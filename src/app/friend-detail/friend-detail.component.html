@@ -10,8 +10,8 @@
         <p><strong>Race : </strong>{{ friend?.race }}</p>
         <p><strong>Nourriture : </strong>{{ friend?.nourriture }}</p>
         <button class="btn btn-info" (click)="onGoBack()"><< Retour</button>
-        <button class="btn btn-success m-1" (click)="onModify(friend._id)">Modifier</button>
-        <button class="btn btn-danger m-1" (click)="onDelete(friend._id)">Supprimer</button>
+        <button class="btn btn-success m-1" (click)="onModify(friend._id)" [disabled]="userId !== friend?.userId">Modifier</button>
+        <button class="btn btn-danger m-1" (click)="onDelete(friend._id)" [disabled]="userId !== friend?.userId">Supprimer</button>
       </div>
 
   </div>

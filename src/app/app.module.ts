@@ -12,6 +12,7 @@ import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import { AddFriendComponent } from './add-friend/add-friend.component';
 import { FriendDetailComponent } from './friend-detail/friend-detail.component';
 import { FriendModifyComponent } from './friend-modify/friend-modify.component';
+import {AuthInterceptor} from './interceptors/auth-interceptor';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,7 @@ import { FriendModifyComponent } from './friend-modify/friend-modify.component';
     ReactiveFormsModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [{provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

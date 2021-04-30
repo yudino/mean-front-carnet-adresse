@@ -3,10 +3,6 @@ import { Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 
-
-// const url = window.location.href;
-
-
 @Injectable({
   providedIn: 'root'
 })

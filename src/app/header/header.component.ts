@@ -11,7 +11,10 @@ import {Router} from '@angular/router';
 })
 export class HeaderComponent implements OnInit, OnDestroy {
 
+  public mode: string;
   public isAuth: boolean;
+
+  private modeSub: Subscription;
   private isAuthSub: Subscription;
 
   constructor(private state: StateService,
@@ -19,6 +22,11 @@ export class HeaderComponent implements OnInit, OnDestroy {
               private router: Router) { }
 
   ngOnInit(): void {
+    this.modeSub = this.state.mode$.subscribe(
+      (mode) => {
+        this.mode = mode;
+      }
+    );
     this.isAuthSub = this.auth.isAuth$.subscribe(
       (auth) => {
         this.isAuth = auth;
@@ -32,6 +40,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
+    this.modeSub.unsubscribe();
     this.isAuthSub.unsubscribe();
   }
 

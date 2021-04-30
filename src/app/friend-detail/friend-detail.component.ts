@@ -25,7 +25,7 @@ export class FriendDetailComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.loading = true;
     this.state.mode$.next('friend-detail');
-    // this.userId = this.auth.userId ? this.auth.userId : 'userID40282382';
+    this.userId = this.auth.userId;
     this.route.params.subscribe(
       (params: Params) => {
         this.crudSchtroumpf.getFriendById(params.id).then(

@@ -17,7 +17,7 @@ export class FriendModifyComponent implements OnInit {
   public friendForm: FormGroup;
   public friend: Schtroumpf;
   public loading = false;
-  // public userId: string;
+  public userId: string;
   public imagePreview: string;
   public errorMessage: string;
 
@@ -31,7 +31,7 @@ export class FriendModifyComponent implements OnInit {
   ngOnInit(): void {
     this.loading = true;
     this.state.mode$.next('form');
-  //  this.userId = this.auth.userId;
+    this.userId = this.auth.userId;
     this.route.params.subscribe(
       (params) => {
         this.crudSchtroumpf.getFriendById(params.id).then(
@@ -61,7 +61,7 @@ export class FriendModifyComponent implements OnInit {
     friend.nourriture = this.friendForm.get('nourriture').value;
     friend.age = this.friendForm.get('age').value;
     friend.imageUrl = '';
- //   friend.userId = this.userId;
+    friend.userId = this.userId;
     this.crudSchtroumpf.modifyFriendWithFile(this.friend._id, friend, this.friendForm.get('image').value).then(
       () => {
         this.friendForm.reset();
