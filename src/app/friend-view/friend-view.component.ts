@@ -1,9 +1,10 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {Schtroumpf} from '../models/Schtroumpf.model';
 import {Subscription} from 'rxjs';
 import {StateService} from '../services/state.service';
 import {CrudSchtroumpf} from '../services/crud-schtroumpf';
 import {Router} from '@angular/router';
+import {User} from '../models/User.model';
+import {AuthService} from '../services/auth.service';
 
 @Component({
   selector: 'app-friend-view',
@@ -12,18 +13,20 @@ import {Router} from '@angular/router';
 })
 export class FriendViewComponent implements OnInit, OnDestroy {
 
-  public friend: Schtroumpf[] = [];
+  public friend: User[] = [];
   public loading: boolean;
-
+  public userId: string;
   private friendSub: Subscription;
 
   constructor(private state: StateService,
               private crudSchtroumpf: CrudSchtroumpf,
-              private router: Router) { }
+              private router: Router,
+              private auth: AuthService) { }
 
 
   ngOnInit(): void {
     this.loading = true;
+    this.userId = this.auth.userId;
     this.state.mode$.next('list');
     this.friendSub = this.crudSchtroumpf.friend$.subscribe(
       (friend) => {
@@ -35,7 +38,7 @@ export class FriendViewComponent implements OnInit, OnDestroy {
   }
 
   onFriendClicked(id: string): void {
-    this.router.navigate(['/friend/' + id]);
+    // this.router.navigate(['/friend/' + id]);
   }
 
   ngOnDestroy(): void {

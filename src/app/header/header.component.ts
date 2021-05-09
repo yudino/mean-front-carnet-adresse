@@ -13,6 +13,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   public mode: string;
   public isAuth: boolean;
+  public userId: string;
 
   private modeSub: Subscription;
   private isAuthSub: Subscription;
@@ -22,6 +23,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
               private router: Router) { }
 
   ngOnInit(): void {
+    this.userId = this.auth.userId;
     this.modeSub = this.state.mode$.subscribe(
       (mode) => {
         this.mode = mode;

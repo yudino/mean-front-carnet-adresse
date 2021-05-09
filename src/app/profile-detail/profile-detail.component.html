@@ -1,0 +1,17 @@
+<div class="container my-3 border rounded">
+  <h1 class="my-3">Profil ami Schtroumpf</h1>
+  <div class="row" *ngIf="!loading">
+    <div class="col mb-2">
+      <img [src]="user?.imageUrl" alt="photo de profil">
+    </div>
+      <div class="col">
+        <h4><strong>Famille : </strong>{{ user?.famille }}</h4>
+        <p class=""><strong>Âge : </strong>{{ user?.age }}</p>
+        <p><strong>Race : </strong>{{ user?.race }}</p>
+        <p><strong>Nourriture : </strong>{{ user?.nourriture }}</p>
+        <button class="btn btn-info" (click)="onGoBack()"><< Retour</button>
+        <button class="btn btn-success m-1" (click)="onModify(user._id)">Modifier</button>
+      </div>
+
+  </div>
+</div>

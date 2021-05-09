@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
+import {User} from '../models/User.model';
 
 @Injectable({
   providedIn: 'root'
@@ -17,23 +18,15 @@ export class AuthService {
               private http: HttpClient) {}
 
   // tslint:disable-next-line:typedef
-  createUser(email: string, password: string) {
-    return new Promise<void>((resolve, reject) => {
-      this.http.post(
-        'http://localhost:8080/api/auth/signup',
-        { email, password })
-        .subscribe(
-          () => {
-            this.login(email, password).then(
-              () => {
-                resolve();
-              }
-            ).catch(
-              (error) => {
-                reject(error);
-              }
-            );
-          },
+  createUser(user: User, image: File) {
+    return new Promise((resolve, reject) => {
+      const userData = new FormData();
+      userData.append('user', JSON.stringify(user));
+      userData.append('image', image, user.race);
+      this.http.post('http://localhost:8080/api/auth/signup', userData).subscribe(
+        (response) => {
+          resolve(response);
+        },
           (error) => {
             reject(error);
           }

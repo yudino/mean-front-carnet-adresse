@@ -5,7 +5,7 @@ import {Router} from '@angular/router';
 import {AuthService} from '../services/auth.service';
 import {CrudSchtroumpf} from '../services/crud-schtroumpf';
 import {mimeType} from '../services/mime-type.validator';
-import {Schtroumpf} from '../models/Schtroumpf.model';
+import {Friends} from '../models/Friends.model';
 
 @Component({
   selector: 'app-add-friend',
@@ -16,7 +16,7 @@ export class AddFriendComponent implements OnInit {
 
   public friendForm: FormGroup;
   public loading = false;
-  public userId: string;
+ // public userId: string;
   public imagePreview: string;
   public errorMessage: string;
 
@@ -35,18 +35,18 @@ export class AddFriendComponent implements OnInit {
       age: [0, Validators.required],
       image: [null, Validators.required, mimeType]
     });
-    this.userId = this.auth.userId;
+  //  this.userId = this.auth.userId;
   }
 
   onSubmit(): void {
     this.loading = true;
-    const schtroumpf = new Schtroumpf();
+    const schtroumpf = new Friends();
     schtroumpf.famille = this.friendForm.get('famille').value;
     schtroumpf.race = this.friendForm.get('race').value;
     schtroumpf.nourriture = this.friendForm.get('nourriture').value;
     schtroumpf.age = this.friendForm.get('age').value;
     schtroumpf.imageUrl = '';
-    schtroumpf.userId = this.userId;
+ //   schtroumpf.userId = this.userId;
     this.crudSchtroumpf.createNewFriendWithFile(schtroumpf, this.friendForm.get('image').value).then(
       () => {
         this.friendForm.reset();

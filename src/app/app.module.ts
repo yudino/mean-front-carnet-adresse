@@ -10,8 +10,8 @@ import { LoginComponent } from './auth/login/login.component';
 import {ReactiveFormsModule} from '@angular/forms';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import { AddFriendComponent } from './add-friend/add-friend.component';
-import { FriendDetailComponent } from './friend-detail/friend-detail.component';
-import { FriendModifyComponent } from './friend-modify/friend-modify.component';
+import { ProfileDetailComponent } from './profile-detail/profile-detail.component';
+import { ProfileModifyComponent } from './profile-modify/profile-modify.component';
 import {AuthInterceptor} from './interceptors/auth-interceptor';
 
 @NgModule({
@@ -22,8 +22,8 @@ import {AuthInterceptor} from './interceptors/auth-interceptor';
     SignupComponent,
     LoginComponent,
     AddFriendComponent,
-    FriendDetailComponent,
-    FriendModifyComponent
+    ProfileDetailComponent,
+    ProfileModifyComponent
   ],
   imports: [
     BrowserModule,

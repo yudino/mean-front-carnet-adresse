@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Subject } from 'rxjs';
-import {Schtroumpf} from '../models/Schtroumpf.model';
+import {Friends} from '../models/Friends.model';
+import {User} from '../models/User.model';
 
 
 
@@ -13,12 +14,12 @@ export class CrudSchtroumpf {
 
   constructor(private http: HttpClient) { }
 
-  private friend: Schtroumpf[] = [];
-  public friend$ = new Subject<Schtroumpf[]>();
+  private friend: User[] = [];
+  public friend$ = new Subject<User[]>();
 
   getFriend() {
     this.http.get('http://localhost:8080/api/carnet').subscribe(
-      (friend: Schtroumpf[]) => {
+      (friend: User[]) => {
         if (friend) {
           this.friend = friend;
           this.emitFriend();
@@ -34,7 +35,7 @@ export class CrudSchtroumpf {
     this.friend$.next(this.friend);
   }
 
-  getFriendById(id: string) {
+  getProfileById(id: string) {
     return new Promise((resolve, reject) => {
       this.http.get('http://localhost:8080/api/carnet/' + id).subscribe(
         (response) => {
@@ -47,21 +48,8 @@ export class CrudSchtroumpf {
     });
   }
 
-  createNewFriend(schtroumpf: Schtroumpf) {
-    return new Promise((resolve, reject) => {
-      this.http.post('http://localhost:3000/api/carnet', schtroumpf).subscribe(
-        (response) => {
-          resolve(response);
-        },
-        (error) => {
-          reject(error);
-        }
-      );
-    });
-  }
-
   // tslint:disable-next-line:typedef
-  createNewFriendWithFile(schtroumpf: Schtroumpf, image: File) {
+  createNewFriendWithFile(schtroumpf: Friends, image: File) {
     return new Promise((resolve, reject) => {
       console.log('appel front');
       const friendData = new FormData();
@@ -79,31 +67,18 @@ export class CrudSchtroumpf {
     });
   }
 
-  modifyFriend(id: string, friend: Schtroumpf) {
+  modifyFriendWithFile(id: string, user: User, image: File | string) {
     return new Promise((resolve, reject) => {
-      this.http.put('http://localhost:8082/api/carnet/' + id, friend).subscribe(
-        (response) => {
-          resolve(response);
-        },
-        (error) => {
-          reject(error);
-        }
-      );
-    });
-  }
-
-  modifyFriendWithFile(id: string, friend: Schtroumpf, image: File | string) {
-    return new Promise((resolve, reject) => {
-      let friendData: Schtroumpf | FormData;
+      let userData: User | FormData;
       if (typeof image === 'string') {
-        friend.imageUrl = image;
-        friendData = friend;
+        user.imageUrl = image;
+        userData = user;
       } else {
-        friendData = new FormData();
-        friendData.append('thing', JSON.stringify(friend));
-        friendData.append('image', image, friend.race);
+        userData = new FormData();
+        userData.append('thing', JSON.stringify(user));
+        userData.append('image', image, user.race);
       }
-      this.http.put('http://localhost:8080/api/carnet/' + id, friendData).subscribe(
+      this.http.put('http://localhost:8080/api/carnet/' + id, userData).subscribe(
         (response) => {
           resolve(response);
         },

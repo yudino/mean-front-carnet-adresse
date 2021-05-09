@@ -1,21 +1,21 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {Schtroumpf} from '../models/Schtroumpf.model';
 import {StateService} from '../services/state.service';
 import {CrudSchtroumpf} from '../services/crud-schtroumpf';
 import {ActivatedRoute, Router} from '@angular/router';
 import {AuthService} from '../services/auth.service';
 import {mimeType} from '../services/mime-type.validator';
+import {User} from '../models/User.model';
 
 @Component({
   selector: 'app-friend-modify',
-  templateUrl: './friend-modify.component.html',
-  styleUrls: ['./friend-modify.component.css']
+  templateUrl: './profile-modify.component.html',
+  styleUrls: ['./profile-modify.component.css']
 })
-export class FriendModifyComponent implements OnInit {
+export class ProfileModifyComponent implements OnInit {
 
-  public friendForm: FormGroup;
-  public friend: Schtroumpf;
+  public userForm: FormGroup;
+  public user: User;
   public loading = false;
   public userId: string;
   public imagePreview: string;
@@ -34,17 +34,17 @@ export class FriendModifyComponent implements OnInit {
     this.userId = this.auth.userId;
     this.route.params.subscribe(
       (params) => {
-        this.crudSchtroumpf.getFriendById(params.id).then(
-          (friend: Schtroumpf) => {
-            this.friend = friend;
-            this.friendForm = this.formBuilder.group({
-              famille: [friend.famille, Validators.required],
-              race: [friend.race, Validators.required],
-              nourriture: [friend.nourriture, Validators.required],
-              age: [friend.age, Validators.required],
-              image: [friend.imageUrl, Validators.required, mimeType]
+        this.crudSchtroumpf.getProfileById(this.userId).then(
+          (user: User) => {
+            this.user = user;
+            this.userForm = this.formBuilder.group({
+              famille: [user.famille, Validators.required],
+              race: [user.race, Validators.required],
+              nourriture: [user.nourriture, Validators.required],
+              age: [user.age, Validators.required],
+              image: [user.imageUrl, Validators.required, mimeType]
             });
-            this.imagePreview = friend.imageUrl;
+            this.imagePreview = user.imageUrl;
             this.loading = false;
           }
         );
@@ -54,17 +54,17 @@ export class FriendModifyComponent implements OnInit {
 
   onSubmit(): void {
     this.loading = true;
-    const friend = new Schtroumpf();
-    friend._id = this.friend._id;
-    friend.famille = this.friendForm.get('famille').value;
-    friend.race = this.friendForm.get('race').value;
-    friend.nourriture = this.friendForm.get('nourriture').value;
-    friend.age = this.friendForm.get('age').value;
-    friend.imageUrl = '';
-    friend.userId = this.userId;
-    this.crudSchtroumpf.modifyFriendWithFile(this.friend._id, friend, this.friendForm.get('image').value).then(
+    const user = new User();
+    user._id = this.user._id;
+    user.famille = this.userForm.get('famille').value;
+    user.race = this.userForm.get('race').value;
+    user.nourriture = this.userForm.get('nourriture').value;
+    user.age = this.userForm.get('age').value;
+    user.imageUrl = '';
+ //   friend.userId = this.userId;
+    this.crudSchtroumpf.modifyFriendWithFile(this.user._id, user, this.userForm.get('image').value).then(
       () => {
-        this.friendForm.reset();
+        this.userForm.reset();
         this.loading = false;
         this.router.navigate(['/carnet']);
       },
@@ -78,11 +78,11 @@ export class FriendModifyComponent implements OnInit {
   onImagePick(event: Event): void {
     const file = (event.target as HTMLInputElement).files[0];
     console.log(file);
-    this.friendForm.get('image').patchValue(file);
-    this.friendForm.get('image').updateValueAndValidity();
+    this.userForm.get('image').patchValue(file);
+    this.userForm.get('image').updateValueAndValidity();
     const reader = new FileReader();
     reader.onload = () => {
-      if (this.friendForm.get('image').valid) {
+      if (this.userForm.get('image').valid) {
         this.imagePreview = reader.result as string;
       } else {
         this.imagePreview = null;

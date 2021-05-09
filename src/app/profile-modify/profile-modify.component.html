@@ -1,6 +1,6 @@
 <div *ngIf="!loading" class="col-sm-6 offset-sm-3 mt-2">
-  <form [formGroup]="friendForm">
-    <h1 class="my-3">Modifier son ami(e) Schtroumpf</h1>
+  <form [formGroup]="userForm">
+    <h1 class="my-3">Modifier votre profil</h1>
     <div class="form-group">
       <label for="famille">Famille</label>
       <input type="text" placeholder="Indiquer sa famille..." id="famille" formControlName="famille" class="form-control">
@@ -22,7 +22,7 @@
       <label for="nourriture">Nourriture</label>
       <input type="text" placeholder="Indiquer sa nourriture..." id="nourriture" formControlName="nourriture" class="form-control">
     </div>
-    <button class="btn btn-primary" (click)="onSubmit()" [disabled]="friendForm.invalid">Valider</button>
+    <button class="btn btn-primary" (click)="onSubmit()" [disabled]="userForm.invalid">Valider</button>
     <p class="alert-danger" *ngIf="errorMessage">{{ errorMessage }}</p>
   </form>
 </div>

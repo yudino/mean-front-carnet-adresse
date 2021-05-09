@@ -1,4 +1,4 @@
-export class Schtroumpf {
+export class Friends {
   _id: string;
   age: number;
   famille: string;
