@@ -5,6 +5,7 @@ import {CrudSchtroumpf} from '../services/crud-schtroumpf';
 import {Router} from '@angular/router';
 import {User} from '../models/User.model';
 import {AuthService} from '../services/auth.service';
+import {Friends} from '../models/Friends.model';
 
 @Component({
   selector: 'app-friend-view',
@@ -14,9 +15,14 @@ import {AuthService} from '../services/auth.service';
 export class FriendViewComponent implements OnInit, OnDestroy {
 
   public friend: User[] = [];
+  public myFriends: User[] = [];
   public loading: boolean;
+  public clicked: boolean;
   public userId: string;
+  public addMessage: string;
+  public id: string;
   private friendSub: Subscription;
+  private myFriendSub: Subscription;
 
   constructor(private state: StateService,
               private crudSchtroumpf: CrudSchtroumpf,
@@ -34,11 +40,22 @@ export class FriendViewComponent implements OnInit, OnDestroy {
         this.loading = false;
       }
     );
+    this.myFriendSub = this.crudSchtroumpf.myFriend$.subscribe(
+      (myFriends) => {
+        this.myFriends = myFriends;
+        this.loading = false;
+      }
+    );
     this.crudSchtroumpf.getFriend();
+    this.crudSchtroumpf.getAllMyFriends(this.userId);
   }
 
-  onFriendClicked(id: string): void {
-    // this.router.navigate(['/friend/' + id]);
+  onFriendClicked(myFriendId: string): void {
+    this.crudSchtroumpf.addFriend(myFriendId, this.userId).then(
+      () => {
+          this.router.navigate(['/my-friend']);
+      }
+    );
   }
 
   ngOnDestroy(): void {

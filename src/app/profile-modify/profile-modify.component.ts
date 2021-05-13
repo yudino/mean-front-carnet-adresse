@@ -62,11 +62,11 @@ export class ProfileModifyComponent implements OnInit {
     user.age = this.userForm.get('age').value;
     user.imageUrl = '';
  //   friend.userId = this.userId;
-    this.crudSchtroumpf.modifyFriendWithFile(this.user._id, user, this.userForm.get('image').value).then(
+    this.crudSchtroumpf.modifyProfileWithFile(this.user._id, user, this.userForm.get('image').value).then(
       () => {
         this.userForm.reset();
         this.loading = false;
-        this.router.navigate(['/carnet']);
+        this.router.navigate(['/modify-profile/' + this.userId]);
       },
       (error) => {
         this.loading = false;

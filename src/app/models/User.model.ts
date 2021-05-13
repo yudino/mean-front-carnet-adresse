@@ -7,4 +7,5 @@ export class User {
   imageUrl: string;
   email: string;
   password: string;
+  friends: [];
 }

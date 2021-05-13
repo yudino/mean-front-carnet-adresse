@@ -33,6 +33,22 @@ export class AuthService {
         );
     });
   }
+  createUserAndAddFriend(user: User, image: File, userId: string) {
+    return new Promise((resolve, reject) => {
+      const userData = new FormData();
+      userData.append('user', JSON.stringify(user));
+      userData.append('image', image, user.race);
+      userData.append('userId', userId);
+      this.http.post('http://localhost:8080/api/auth/create-user-and-friend', userData).subscribe(
+        (response) => {
+          resolve(response);
+        },
+        (error) => {
+          reject(error);
+        }
+      );
+    });
+  }
 
   // tslint:disable-next-line:typedef
   login(email: string, password: string) {

@@ -15,7 +15,9 @@ export class CrudSchtroumpf {
   constructor(private http: HttpClient) { }
 
   private friend: User[] = [];
+  private myfriends: User[] = [];
   public friend$ = new Subject<User[]>();
+  public myFriend$ = new Subject<User[]>();
 
   getFriend() {
     this.http.get('http://localhost:8080/api/carnet').subscribe(
@@ -35,6 +37,24 @@ export class CrudSchtroumpf {
     this.friend$.next(this.friend);
   }
 
+  getAllMyFriends(userId: string) {
+    this.http.get('http://localhost:8080/api/carnet/my-friend/' + userId).subscribe(
+      (myfriends: User[]) => {
+        if (myfriends) {
+          this.myfriends = myfriends;
+          this.emitAllMyFriends();
+        }
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  }
+
+  emitAllMyFriends() {
+    this.myFriend$.next(this.myfriends);
+  }
+
   getProfileById(id: string) {
     return new Promise((resolve, reject) => {
       this.http.get('http://localhost:8080/api/carnet/' + id).subscribe(
@@ -48,26 +68,25 @@ export class CrudSchtroumpf {
     });
   }
 
-  // tslint:disable-next-line:typedef
-  createNewFriendWithFile(schtroumpf: Friends, image: File) {
+  addFriend(myFriendId: string, userId: string) {
     return new Promise((resolve, reject) => {
-      console.log('appel front');
-      const friendData = new FormData();
-      friendData.append('schtroumpf', JSON.stringify(schtroumpf));
-      friendData.append('image', image, schtroumpf.race);
-      this.http.post('http://localhost:8080/api/carnet', friendData).subscribe(
-        (response) => {
-          resolve(response);
-        },
-        (error) => {
-          console.log('je suis dans error front');
-          reject(error);
-        }
-      );
+      const params = new FormData();
+      params.append('userId', JSON.stringify(userId));
+      params.append('myFriendId', JSON.stringify(myFriendId));
+      const ids = { myFriendId, userId };
+      this.http.put('http://localhost:8080/api/carnet/my-friend/', params, {params : ids} ).subscribe(
+            (response) => {
+              resolve(response);
+            },
+            (error) => {
+              console.log('je suis dans error createFriend');
+              reject(error);
+            }
+          );
     });
   }
 
-  modifyFriendWithFile(id: string, user: User, image: File | string) {
+  modifyProfileWithFile(id: string, user: User, image: File | string) {
     return new Promise((resolve, reject) => {
       let userData: User | FormData;
       if (typeof image === 'string') {
@@ -89,9 +108,10 @@ export class CrudSchtroumpf {
     });
   }
 
-  deleteFriend(id: string) {
+  deleteFriend(myFriendId: string, userId: string) {
     return new Promise((resolve, reject) => {
-      this.http.delete('http://localhost:8080/api/carnet/' + id).subscribe(
+      const ids = { myFriendId, userId };
+      this.http.delete('http://localhost:8080/api/carnet/my-friend/',  {params : ids}).subscribe(
         (response) => {
           resolve(response);
         },

@@ -14,10 +14,13 @@
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" routerLink="/add" *ngIf="isAuth">Ajouter des ami(e)s</a>
+        <a class="nav-link" routerLink="/my-friends" *ngIf="isAuth">Voir mes ami(e)s</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" routerLink="/profile/ {{ userId }}" *ngIf="isAuth">Mon profil</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/add-friend" *ngIf="isAuth">Ajouter un ami</a>
       </li>
     </ul>
     <form class="form-inline my-2 my-lg-0">

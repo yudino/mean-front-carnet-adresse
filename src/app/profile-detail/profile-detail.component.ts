@@ -45,16 +45,6 @@ export class ProfileDetailComponent implements OnInit, OnDestroy {
   onModify(id: string): void {
         this.router.navigate(['/modify-profile/' + id]);
   }
-  //
-  // onDelete(id: string): void {
-  //   this.loading = true;
-  //   this.crudSchtroumpf.deleteFriend(id).then(
-  //     () => {
-  //       this.loading = false;
-  //       this.router.navigate(['/carnet']);
-  //     }
-  //   );
-  // }
 
   ngOnDestroy(): void {
   }

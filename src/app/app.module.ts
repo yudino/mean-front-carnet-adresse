@@ -9,11 +9,14 @@ import { SignupComponent } from './auth/signup/signup.component';
 import { LoginComponent } from './auth/login/login.component';
 import {ReactiveFormsModule} from '@angular/forms';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
-import { AddFriendComponent } from './add-friend/add-friend.component';
+import { MyFriendsComponent } from './my-friends/my-friends.component';
 import { ProfileDetailComponent } from './profile-detail/profile-detail.component';
 import { ProfileModifyComponent } from './profile-modify/profile-modify.component';
 import {AuthInterceptor} from './interceptors/auth-interceptor';
+import { AddfriendComponent } from './addfriend/addfriend.component';
 
+
+// @ts-ignore
 @NgModule({
   declarations: [
     AppComponent,
@@ -21,9 +24,10 @@ import {AuthInterceptor} from './interceptors/auth-interceptor';
     FriendViewComponent,
     SignupComponent,
     LoginComponent,
-    AddFriendComponent,
+    MyFriendsComponent,
     ProfileDetailComponent,
-    ProfileModifyComponent
+    ProfileModifyComponent,
+    AddfriendComponent
   ],
   imports: [
     BrowserModule,

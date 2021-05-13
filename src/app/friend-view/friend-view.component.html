@@ -3,21 +3,23 @@
 
   <p class="text-center" *ngIf="friend.length <= 0 && !loading">Aucun ami(es) Schtroumpf pour le moment !</p>
   <div class="friend-grid" *ngIf="friend.length >= 0">
-    <div class="card my-3"
-         *ngFor="let contact of friend"
-         [ngClass]="{'open': contact._id }"
-         (click)="onFriendClicked(contact._id)"
-         >
-      <div class="row " *ngIf="contact._id !== userId">
-        <div class="col-auto img-profile">
-          <img src="{{ contact.imageUrl }}" class="img-fluid" alt="">
-        </div>
-        <div class="col">
-          <div class="card-block px-2">
-            <h4 class="card-title"><strong>Famille :</strong> {{ contact.famille }}</h4>
-            <p class="card-text"><strong>Âge :</strong> {{ contact.age }}</p>
-            <p class="card-text"><strong>Race :</strong> {{ contact.race }}</p>
-            <p class="card-text"><strong>Nourriture :</strong> {{ contact.nourriture }}</p>
+    <div *ngFor="let contact of friend">
+      <div class="card my-3"
+           [ngClass]="{'open': contact._id }"
+           *ngIf="contact._id !== userId"
+      >
+        <div class="row ">
+          <div class="col-auto img-profile">
+            <img src="{{ contact.imageUrl }}" class="img-fluid" alt="">
+          </div>
+          <div class="col">
+            <div class="card-block px-2">
+              <h4 class="card-title"><strong>Famille :</strong> {{ contact.famille }}</h4>
+              <p class="card-text"><strong>Âge :</strong> {{ contact.age }}</p>
+              <p class="card-text"><strong>Race :</strong> {{ contact.race }}</p>
+              <p class="card-text"><strong>Nourriture :</strong> {{ contact.nourriture }}</p>
+            </div>
+            <button class="btn btn-success my-3" (click)="onFriendClicked(contact._id)">Devenir ami</button>
           </div>
         </div>
       </div>
